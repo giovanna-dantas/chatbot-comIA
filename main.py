@@ -13,11 +13,11 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+from groq import Groq
 
 load_dotenv()
 
-modelo_ia = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+modelo_ia = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 st.write("### ChatBot com IA") 
 
@@ -46,7 +46,7 @@ if mensagem_usuario:
     # resposta da IA
     resposta_modelo = modelo_ia.chat.completions.create(
         messages=st.session_state["lista_mensagens"],
-        model="gpt-4o-mini"
+        model="llama-3.1-8b-instant"
     )
     
     resposta_ia = resposta_modelo.choices[0].message.content
